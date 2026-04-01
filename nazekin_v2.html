@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Анатолий Назейкин</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#111008;
+  --paper:#f5f1e8;
+  --paper2:#ede8da;
+  --gold:#8a6d35;
+  --gold2:#c4a05a;
+  --gold-pale:#f0e6cc;
+  --muted:#7a7060;
+  --white:#fdfaf3;
+  --dark:#16140e;
+}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+
+/* NOISE */
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;opacity:0.025;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:100;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(245,241,232,0.88);backdrop-filter:blur(20px);border-bottom:1px solid rgba(138,109,53,0.12)}
+.nav-id{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;font-style:italic;color:var(--gold);letter-spacing:0.02em}
+.nav-menu{display:flex;gap:32px;list-style:none}
+.nav-menu a{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-menu a:hover{color:var(--gold)}
+.nav-year{font-size:11px;letter-spacing:0.1em;color:rgba(138,109,53,0.4)}
+
+/* ── HERO — full bleed split ── */
+.hero{display:grid;grid-template-columns:55% 45%;min-height:calc(100vh - 56px)}
+
+.hero-l{padding:80px 5vw 80px 5vw;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid rgba(138,109,53,0.12)}
+
+.hero-top{}
+.hero-index{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold2);margin-bottom:48px;display:flex;align-items:center;gap:14px}
+.hero-index::before{content:'';width:28px;height:1px;background:var(--gold2)}
+
+.hero-h1{font-family:'Cormorant Garamond',serif;font-weight:300;line-height:1.05;letter-spacing:-0.02em;color:var(--ink)}
+.hero-fn{font-size:clamp(36px,5vw,72px);display:block;font-style:italic}
+.hero-ln{font-size:clamp(52px,7.5vw,108px);display:block;font-weight:600;line-height:0.95;margin-left:-3px}
+
+.hero-mid{margin:48px 0}
+.hero-rule{display:flex;align-items:center;gap:0;margin-bottom:28px}
+.hero-rule-line{height:1px;background:linear-gradient(90deg,var(--gold),transparent);flex:1}
+.hero-rule-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);margin-right:12px;flex-shrink:0}
+.hero-role{font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);line-height:1.9;max-width:380px}
+
+.hero-bottom{}
+.hero-lead{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,1.8vw,24px);font-weight:300;font-style:italic;line-height:1.75;color:var(--muted);max-width:440px;margin-bottom:40px}
+.hero-actions{display:flex;gap:12px}
+.btn-solid{background:var(--gold);color:var(--white);border:none;padding:12px 28px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-block;transition:background .2s}
+.btn-solid:hover{background:#6e5628}
+.btn-line{background:transparent;color:var(--gold);border:1px solid rgba(138,109,53,0.35);padding:12px 28px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-block;transition:all .2s}
+.btn-line:hover{border-color:var(--gold);background:var(--gold-pale)}
+
+.hero-r{background:var(--dark);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
+.hero-photo-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.hero-monogram{font-family:'Cormorant Garamond',serif;font-size:220px;font-weight:300;font-style:italic;color:rgba(196,160,90,0.07);line-height:1;user-select:none}
+.hero-photo-hint{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.hero-initials{font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:300;font-style:italic;color:rgba(196,160,90,0.25);display:block;line-height:1}
+.hero-photo-label{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.12);margin-top:12px}
+.hero-caption{position:relative;z-index:2;padding:32px;border-top:1px solid rgba(196,160,90,0.1)}
+.hero-caption-name{font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:rgba(255,255,255,0.35);letter-spacing:0.05em}
+.hero-caption-since{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(196,160,90,0.4);margin-top:4px}
+
+/* ── TICKER ── */
+.ticker{background:var(--gold);overflow:hidden;height:36px;display:flex;align-items:center}
+.ticker-track{display:flex;animation:ticker 28s linear infinite;white-space:nowrap}
+.ticker-item{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--white);padding:0 40px;opacity:0.85}
+.ticker-sep{color:rgba(255,255,255,0.35);padding:0 4px}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── NUMBERS ── */
+.numbers{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid rgba(138,109,53,0.1)}
+.num-cell{padding:48px 40px;border-right:1px solid rgba(138,109,53,0.1);text-align:center}
+.num-cell:last-child{border-right:none}
+.num-val{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;font-style:italic;color:var(--gold);display:block;line-height:1;margin-bottom:10px}
+.num-desc{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)}
+
+/* ── PORTRAIT — editorial intro ── */
+.portrait{padding:100px 5vw;display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:start;border-bottom:1px solid rgba(138,109,53,0.1)}
+.portrait-aside{}
+.portrait-label{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:block}
+.portrait-index-num{font-family:'Cormorant Garamond',serif;font-size:96px;font-weight:300;font-style:italic;color:rgba(138,109,53,0.08);line-height:1;margin-bottom:0;margin-top:-12px}
+.portrait-main{}
+.portrait-pull{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,2.8vw,38px);font-weight:300;line-height:1.55;color:var(--ink);margin-bottom:40px}
+.portrait-pull em{font-style:italic;color:var(--gold)}
+.portrait-body{font-size:15px;line-height:1.85;color:var(--muted);columns:2;column-gap:40px}
+.portrait-body p{margin-bottom:16px;break-inside:avoid}
+
+/* ── TIMELINE — magazine style ── */
+.timeline{background:var(--dark);padding:100px 5vw;border-bottom:1px solid rgba(196,160,90,0.1)}
+.tl-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:72px}
+.tl-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.5vw,52px);font-weight:300;font-style:italic;color:rgba(255,255,255,0.9);line-height:1.1}
+.tl-eyebrow{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold2);margin-bottom:12px;display:block}
+.tl-count{font-family:'Cormorant Garamond',serif;font-size:80px;font-weight:300;font-style:italic;color:rgba(196,160,90,0.08);line-height:1}
+
+.tl-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(196,160,90,0.08)}
+.tl-card{background:var(--dark);padding:36px 28px;transition:background .3s}
+.tl-card:hover{background:#1e1b12}
+.tl-card-year{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;font-style:italic;color:var(--gold2);margin-bottom:16px;display:block}
+.tl-card-bar{width:24px;height:1px;background:rgba(196,160,90,0.3);margin-bottom:16px}
+.tl-card-event{font-size:13px;line-height:1.6;color:rgba(255,255,255,0.55);letter-spacing:0.01em}
+
+/* ── PHILOSOPHY — цитаты ── */
+.philosophy{padding:100px 5vw;border-bottom:1px solid rgba(138,109,53,0.1)}
+.phil-header{margin-bottom:72px}
+.phil-eyebrow{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:block}
+.phil-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.5vw,52px);font-weight:300;color:var(--ink);line-height:1.15}
+
+.quotes-layout{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(138,109,53,0.1)}
+
+.quote-card{background:var(--paper);padding:48px 40px;transition:background .3s}
+.quote-card:hover{background:var(--white)}
+.quote-card.featured{background:var(--ink);grid-column:1/-1;padding:72px 80px;text-align:center}
+
+.qc-mark{font-family:'Cormorant Garamond',serif;font-size:48px;font-style:italic;color:rgba(138,109,53,0.25);line-height:0.6;margin-bottom:28px;display:block}
+.qc-text{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.8vw,22px);font-weight:300;font-style:italic;line-height:1.7;color:var(--ink);margin-bottom:24px}
+.quote-card.featured .qc-text{font-size:clamp(22px,2.8vw,34px);color:rgba(255,255,255,0.9);max-width:800px;margin:0 auto 32px}
+.quote-card.featured .qc-mark{color:rgba(196,160,90,0.2)}
+.qc-tag{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:12px}
+.qc-tag::before{content:'';width:20px;height:1px;background:var(--gold)}
+.quote-card.featured .qc-tag{justify-content:center;color:rgba(196,160,90,0.6)}
+.quote-card.featured .qc-tag::before{background:rgba(196,160,90,0.3)}
+
+/* ── PRESS ── */
+.press{background:var(--paper2);padding:100px 5vw;border-bottom:1px solid rgba(138,109,53,0.1)}
+.press-header{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:64px}
+.press-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.5vw,52px);font-weight:300;color:var(--ink);line-height:1.15}
+.press-note{font-size:14px;line-height:1.8;color:var(--muted)}
+
+.press-list{display:flex;flex-direction:column;gap:0}
+.press-item{display:grid;grid-template-columns:100px 1fr 140px;gap:32px;align-items:center;padding:28px 0;border-bottom:1px solid rgba(138,109,53,0.1);transition:padding-left .3s}
+.press-item:first-child{border-top:1px solid rgba(138,109,53,0.1)}
+.press-item:hover{padding-left:12px}
+.press-source{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:500}
+.press-headline{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:300;line-height:1.45;color:var(--ink)}
+.press-date{font-size:11px;letter-spacing:0.1em;color:var(--muted);text-align:right}
+
+/* ── GALLERY ── */
+.gallery{padding:100px 5vw;border-bottom:1px solid rgba(138,109,53,0.1)}
+.gal-eyebrow{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:56px;display:block}
+
+.gal-mosaic{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:280px 280px;gap:4px}
+.gal-tile{background:var(--dark);position:relative;overflow:hidden;cursor:pointer}
+.gal-tile:nth-child(1){grid-row:1/3}
+.gal-tile-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.gal-diag{width:100%;height:100%;opacity:0.05;background:repeating-linear-gradient(135deg,var(--gold2) 0,var(--gold2) 1px,transparent 1px,transparent 18px)}
+.gal-tile-label{position:absolute;bottom:0;left:0;right:0;padding:20px 24px;background:linear-gradient(transparent,rgba(0,0,0,0.65));z-index:2}
+.gal-tile-name{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.4)}
+.gal-hover{position:absolute;inset:0;z-index:3;background:rgba(138,109,53,0.2);opacity:0;transition:opacity .35s;display:flex;align-items:center;justify-content:center}
+.gal-tile:hover .gal-hover{opacity:1}
+.gal-plus{width:36px;height:36px;border:1px solid rgba(196,160,90,0.5);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.gal-plus::before,.gal-plus::after{content:'';position:absolute;background:var(--gold2)}
+.gal-plus::before{width:12px;height:1px}
+.gal-plus::after{width:1px;height:12px}
+
+/* ── CLOSING STATEMENT ── */
+.closing{padding:120px 5vw;text-align:center;position:relative}
+.closing-bg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Cormorant Garamond',serif;font-size:clamp(100px,18vw,260px);font-weight:300;font-style:italic;color:rgba(138,109,53,0.04);white-space:nowrap;pointer-events:none;line-height:1}
+.closing-diamond{width:8px;height:8px;background:var(--gold);transform:rotate(45deg);margin:0 auto 48px}
+.closing-text{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,30px);font-weight:300;font-style:italic;line-height:1.7;color:var(--muted);max-width:680px;margin:0 auto;position:relative}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);padding:48px 5vw;display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;border-top:1px solid rgba(196,160,90,0.15)}
+.ft-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;font-style:italic;color:var(--gold2)}
+.ft-copy{font-size:10px;letter-spacing:0.15em;color:rgba(255,255,255,0.2);text-align:center;text-transform:uppercase}
+.ft-org{font-size:10px;letter-spacing:0.1em;color:rgba(196,160,90,0.3);text-align:right}
+
+/* ── REVEAL ── */
+.r{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s ease}
+.r.v{opacity:1;transform:none}
+.r2{opacity:0;transform:translateX(-20px);transition:opacity .6s ease,transform .6s ease}
+.r2.v{opacity:1;transform:none}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  nav{padding:0 24px}
+  .nav-menu,.nav-year{display:none}
+  .hero{grid-template-columns:1fr}
+  .hero-r{height:280px}
+  .hero-l{padding:60px 24px}
+  .numbers{grid-template-columns:1fr 1fr}
+  .num-cell:nth-child(2){border-right:none}
+  .portrait{grid-template-columns:1fr;padding:60px 24px;gap:32px}
+  .portrait-body{columns:1}
+  .timeline{padding:60px 24px}
+  .tl-grid{grid-template-columns:1fr 1fr}
+  .tl-header{flex-direction:column;align-items:flex-start}
+  .philosophy,.press,.gallery,.closing{padding:60px 24px}
+  .quotes-layout{grid-template-columns:1fr}
+  .quote-card.featured{padding:48px 32px}
+  .press-header{grid-template-columns:1fr}
+  .press-item{grid-template-columns:80px 1fr;gap:16px}
+  .press-date{display:none}
+  .gal-mosaic{grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,200px)}
+  .gal-tile:nth-child(1){grid-row:auto}
+  footer{grid-template-columns:1fr;gap:12px;text-align:center;padding:36px 24px}
+  .ft-org,.ft-copy{text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-id">А. Назейкин</div>
+  <ul class="nav-menu">
+    <li><a href="#portrait">Биография</a></li>
+    <li><a href="#philosophy">Взгляды</a></li>
+    <li><a href="#press">Пресса</a></li>
+    <li><a href="#gallery">Галерея</a></li>
+  </ul>
+  <div class="nav-year">1992 — н.в.</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-l">
+    <div class="hero-top">
+      <div class="hero-index">Председатель · Профсоюз связи России</div>
+      <h1 class="hero-h1">
+        <span class="hero-fn">Анатолий Георгиевич</span>
+        <span class="hero-ln">Назейкин</span>
+      </h1>
+    </div>
+    <div class="hero-mid">
+      <div class="hero-rule"><div class="hero-rule-dot"></div><div class="hero-rule-line"></div></div>
+      <div class="hero-role">Председатель Профсоюза работников связи<br>Российской Федерации · С 1992 года</div>
+    </div>
+    <div class="hero-bottom">
+      <p class="hero-lead">Более трёх десятилетий — защита трудовых прав, диалог с государством, голос отрасли на федеральном и международном уровне.</p>
+      <div class="hero-actions">
+        <a href="#portrait" class="btn-solid">Биография</a>
+        <a href="#philosophy" class="btn-line">Взгляды</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-r">
+    <div class="hero-photo-bg"><div class="hero-monogram">АН</div></div>
+    <div class="hero-photo-hint">
+      <span class="hero-initials">АН</span>
+      <div class="hero-photo-label">Фото будет добавлено</div>
+    </div>
+    <div class="hero-caption">
+      <div class="hero-caption-name">Анатолий Георгиевич Назейкин</div>
+      <div class="hero-caption-since">Председатель с 1992 года</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">Профсоюз работников связи России</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">Защита социально-трудовых прав</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">Федеральный уровень</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">Международное сотрудничество</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">50+ лет деятельности</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">Социальное партнёрство</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">Профсоюз работников связи России</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">Защита социально-трудовых прав</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">Федеральный уровень</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">Международное сотрудничество</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">50+ лет деятельности</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">Социальное партнёрство</span><span class="ticker-sep">·</span>
+  </div>
+</div>
+
+<!-- NUMBERS -->
+<div class="numbers r">
+  <div class="num-cell"><span class="num-val">50+</span><span class="num-desc">Лет деятельности</span></div>
+  <div class="num-cell"><span class="num-val" style="font-size:36px;padding-top:8px">с 1992</span><span class="num-desc">Руководство профсоюзом</span></div>
+  <div class="num-cell"><span class="num-val" style="font-size:28px;padding-top:14px">Федеральный</span><span class="num-desc">Уровень влияния</span></div>
+  <div class="num-cell"><span class="num-val" style="font-size:26px;padding-top:14px">Международный</span><span class="num-desc">Формат работы</span></div>
+</div>
+
+<!-- PORTRAIT -->
+<section class="portrait r" id="portrait">
+  <div class="portrait-aside">
+    <span class="portrait-label">Биография</span>
+    <div class="portrait-index-num">01</div>
+  </div>
+  <div class="portrait-main">
+    <p class="portrait-pull">Человек, который на протяжении более <em>тридцати лет</em> определяет повестку трудовых отношений в отрасли связи России.</p>
+    <div class="portrait-body">
+      <p>Анатолий Георгиевич Назейкин родился в 1946 году. Трудовую деятельность начал в 1970-х годах, последовательно пройдя путь от рядового специалиста до руководителя одной из крупнейших профсоюзных организаций страны.</p>
+      <p>С 1978 года активно включился в профсоюзную работу. В 1990 году возглавил союз, а с 1992 года бессменно занимает должность председателя Профсоюза работников связи Российской Федерации.</p>
+      <p>За годы руководства последовательно выстраивал механизмы социального партнёрства, участвовал в формировании государственной политики в сфере труда, представлял интересы работников на федеральном и международном уровнях.</p>
+      <p>Деятельность охватывает переговоры с работодателями и органами государственной власти, участие в законотворческом процессе, взаимодействие с международными профсоюзными объединениями.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline">
+  <div class="tl-header r">
+    <div>
+      <span class="tl-eyebrow">Хронология</span>
+      <div class="tl-title">Путь длиной<br>в полвека</div>
+    </div>
+    <div class="tl-count">V</div>
+  </div>
+  <div class="tl-grid">
+    <div class="tl-card r2" style="transition-delay:.0s">
+      <span class="tl-card-year">1946</span>
+      <div class="tl-card-bar"></div>
+      <div class="tl-card-event">Рождение. Начало жизненного пути</div>
+    </div>
+    <div class="tl-card r2" style="transition-delay:.1s">
+      <span class="tl-card-year">1970-е</span>
+      <div class="tl-card-bar"></div>
+      <div class="tl-card-event">Начало трудовой деятельности в отрасли связи</div>
+    </div>
+    <div class="tl-card r2" style="transition-delay:.2s">
+      <span class="tl-card-year">1978</span>
+      <div class="tl-card-bar"></div>
+      <div class="tl-card-event">Вхождение в профсоюзное движение, защита прав работников</div>
+    </div>
+    <div class="tl-card r2" style="transition-delay:.3s">
+      <span class="tl-card-year">1990</span>
+      <div class="tl-card-bar"></div>
+      <div class="tl-card-event">Руководство профсоюзным союзом</div>
+    </div>
+    <div class="tl-card r2" style="transition-delay:.4s;border-left:2px solid var(--gold2)">
+      <span class="tl-card-year" style="color:var(--gold2)">1992</span>
+      <div class="tl-card-bar" style="background:var(--gold2);width:36px"></div>
+      <div class="tl-card-event" style="color:rgba(255,255,255,0.75)">Председатель Профсоюза работников связи России — по настоящее время</div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY / ЦИТАТЫ -->
+<section class="philosophy r" id="philosophy">
+  <div class="phil-header">
+    <span class="phil-eyebrow">Взгляды и позиция</span>
+    <h2 class="phil-title">Что он думает<br>о труде и обществе</h2>
+  </div>
+  <div class="quotes-layout">
+    <div class="quote-card r" style="transition-delay:.05s">
+      <span class="qc-mark">"</span>
+      <p class="qc-text">Профсоюз — не реликт прошлого, а живой инструмент баланса между трудом и капиталом.</p>
+      <div class="qc-tag">О роли профсоюзов</div>
+    </div>
+    <div class="quote-card r" style="transition-delay:.1s">
+      <span class="qc-mark">"</span>
+      <p class="qc-text">Социальное партнёрство работает только тогда, когда все стороны слышат друг друга — не декларируют, а слышат.</p>
+      <div class="qc-tag">О диалоге</div>
+    </div>
+    <div class="quote-card featured r" style="transition-delay:.15s">
+      <span class="qc-mark">"</span>
+      <p class="qc-text">Обеспечение достойных условий труда является ключевым фактором устойчивого развития общества.</p>
+      <div class="qc-tag">Ключевая позиция</div>
+    </div>
+    <div class="quote-card r" style="transition-delay:.2s">
+      <span class="qc-mark">"</span>
+      <p class="qc-text">Отрасль связи — хребет современной экономики. Люди, которые её строят, заслуживают соответствующей защиты.</p>
+      <div class="qc-tag">Об отрасли</div>
+    </div>
+    <div class="quote-card r" style="transition-delay:.25s">
+      <span class="qc-mark">"</span>
+      <p class="qc-text">Трудовое законодательство должно быть живым документом — следовать за реальностью, а не отставать от неё на десятилетие.</p>
+      <div class="qc-tag">О законодательстве</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRESS -->
+<section class="press r" id="press">
+  <div class="press-header">
+    <div>
+      <span style="font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:16px">Пресса и упоминания</span>
+      <h2 class="press-title">В центре<br>общественного внимания</h2>
+    </div>
+    <p class="press-note">Деятельность Анатолия Георгиевича освещается федеральными изданиями и отраслевыми СМИ на протяжении нескольких десятилетий.</p>
+  </div>
+  <div class="press-list">
+    <div class="press-item r2" style="transition-delay:.0s">
+      <div class="press-source">Российская газета</div>
+      <div class="press-headline">Профсоюз связи выступил с инициативой повышения минимального отраслевого тарифа</div>
+      <div class="press-date">2025</div>
+    </div>
+    <div class="press-item r2" style="transition-delay:.08s">
+      <div class="press-source">ТАСС</div>
+      <div class="press-headline">Назейкин переизбран председателем Профсоюза работников связи на очередной срок</div>
+      <div class="press-date">2025</div>
+    </div>
+    <div class="press-item r2" style="transition-delay:.16s">
+      <div class="press-source">Труд</div>
+      <div class="press-headline">Участие в международной конференции МОТ: позиция российских профсоюзов связи</div>
+      <div class="press-date">2024</div>
+    </div>
+    <div class="press-item r2" style="transition-delay:.24s">
+      <div class="press-source">Коммерсантъ</div>
+      <div class="press-headline">Отраслевое соглашение подписано при посредничестве Профсоюза работников связи</div>
+      <div class="press-date">2023</div>
+    </div>
+    <div class="press-item r2" style="transition-delay:.32s">
+      <div class="press-source">Ведомости</div>
+      <div class="press-headline">Профсоюзы отрасли требуют пересмотра условий дистанционного труда</div>
+      <div class="press-date">2023</div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery r" id="gallery">
+  <span class="gal-eyebrow">Фотогалерея</span>
+  <div class="gal-mosaic">
+    <div class="gal-tile">
+      <div class="gal-tile-bg"><div class="gal-diag"></div></div>
+      <div class="gal-tile-label"><div class="gal-tile-name">Выступления</div></div>
+      <div class="gal-hover"><div class="gal-plus"></div></div>
+    </div>
+    <div class="gal-tile">
+      <div class="gal-tile-bg"><div class="gal-diag"></div></div>
+      <div class="gal-tile-label"><div class="gal-tile-name">Встречи</div></div>
+      <div class="gal-hover"><div class="gal-plus"></div></div>
+    </div>
+    <div class="gal-tile">
+      <div class="gal-tile-bg"><div class="gal-diag"></div></div>
+      <div class="gal-tile-label"><div class="gal-tile-name">Съезды</div></div>
+      <div class="gal-hover"><div class="gal-plus"></div></div>
+    </div>
+    <div class="gal-tile">
+      <div class="gal-tile-bg"><div class="gal-diag"></div></div>
+      <div class="gal-tile-label"><div class="gal-tile-name">Конференции</div></div>
+      <div class="gal-hover"><div class="gal-plus"></div></div>
+    </div>
+    <div class="gal-tile">
+      <div class="gal-tile-bg"><div class="gal-diag"></div></div>
+      <div class="gal-tile-label"><div class="gal-tile-name">Переговоры</div></div>
+      <div class="gal-hover"><div class="gal-plus"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="closing-bg">Назейкин</div>
+  <div class="closing-diamond"></div>
+  <p class="closing-text r">Деятельность направлена на обеспечение баланса интересов работников, работодателей и государства — во имя достойного труда в отрасли связи России.</p>
+</section>
+
+<footer>
+  <div class="ft-logo">А. Назейкин</div>
+  <div class="ft-copy">© Официальный информационный ресурс</div>
+  <div class="ft-org">Профсоюз работников связи России</div>
+</footer>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('v'); });
+}, {threshold: 0.08});
+document.querySelectorAll('.r,.r2').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
